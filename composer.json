@@ -1,6 +1,6 @@
 {
     "name": "gild-inc/laravel-php-codesniffer",
-    "description": "The php-codesniffer with laravel .",
+    "description": "The php-codesniffer with laravel.",
     "type": "library",
     "authors": [
         {
@@ -8,7 +8,7 @@
             "email": "masaya.goto@gild.co.jp"
         }
     ],
-    "require-dev": {
+    "require": {
         "squizlabs/php_codesniffer": "*"
     }
 }
