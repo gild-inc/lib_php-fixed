@@ -12,7 +12,7 @@
         "squizlabs/php_codesniffer": "*"
     },
     "scripts": {
-        "post-autoload-dump": [
+        "init": [
             ". post-autoload-dump.sh"
         ]
     }
