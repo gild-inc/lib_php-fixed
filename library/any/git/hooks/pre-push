@@ -1,0 +1,12 @@
+#!/bin/sh
+
+while read local_ref local_sha remote_ref remote_sha
+do
+    # masterへのpush禁止
+    if [[ "${remote_ref##refs/heads/}" = "master" ]]; then
+        echo $'\e[1;31morigin/masterへはpushできません。\e[0m'
+        exit 1
+    fi
+done
+
+exit 0

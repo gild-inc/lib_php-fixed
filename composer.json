@@ -1,6 +1,6 @@
 {
-    "name": "gild-inc/laravel-php-codesniffer",
-    "description": "The php-codesniffer with laravel.",
+    "name": "gild-inc/library-repository-required",
+    "description": "This is a central repository of settings needed for repositories referenced from multiple project repositories.",
     "type": "library",
     "authors": [
         {

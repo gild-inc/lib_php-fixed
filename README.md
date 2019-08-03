@@ -7,14 +7,14 @@
 {
     "repositories":[{
         "type": "vcs",
-        "url": "git@github.gild-inc:gild-inc/laravel-php-codesniffer.git"
+        "url": "git@github.gild-inc:gild-inc/library-repository-required.git"
     }],
     "require-dev": {
-        "gild-inc/laravel-php-codesniffer": "*"
+        "gild-inc/library-repository-required": "*"
     },
     "scripts": {
             "post-autoload-dump": [
-                "cp vendor/gild-inc/laravel-php-codesniffer/git/hooks/pre-push .git/hooks/"
+                ". vendor/gild-inc/library-repository-required/library/laravel/setup.sh"
             ]
         }
 }
