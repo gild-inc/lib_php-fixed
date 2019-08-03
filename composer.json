@@ -10,5 +10,10 @@
     ],
     "require": {
         "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            ". post-autoload-dump.sh"
+        ]
     }
 }
