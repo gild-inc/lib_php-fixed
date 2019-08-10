@@ -19,7 +19,7 @@
     },
     "scripts": {
         "post-autoload-dump": [
-            ". vendor/gild-inc/git-hooks/execution.sh {any or laravel}"
+            ". vendor/gild-lib/git-hooks/execution.sh {any or laravel}"
         ]
     }
 }
