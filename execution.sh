@@ -7,8 +7,8 @@ if [ $# -eq 0 ]; then
     return
 fi
 
-if [ -e vendor/gild-inc/git-hooks/1 ]; then
-    . vendor/gild-inc/git-hooks/$1/execution.sh
+if [ -e vendor/gild-lib/git-hooks/$1 ]; then
+    . vendor/gild-lib/git-hooks/$1/execution.sh
 else
     echo "指定した引数は有効ではありません。"
 fi
