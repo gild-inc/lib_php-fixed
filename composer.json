@@ -1,6 +1,6 @@
 {
-    "name": "gild-inc/library-repository-required",
-    "description": "This is a central repository of settings needed for repositories referenced from multiple project repositories.",
+    "name": "gild-lib/git-hooks",
+    "description": "A library that provides scripts triggered by specific git operations.",
     "type": "library",
     "authors": [
         {

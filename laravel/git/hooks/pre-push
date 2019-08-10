@@ -10,6 +10,6 @@ do
 done
 
 # コーディングチェックエラーがあればpushはしない。
-. vendor/gild-inc/library-repository-required/library/laravel/php-codesniffer/code_check.sh
+. vendor/gild-inc/git-hooks/laravel/php-codesniffer/code_check.sh
 
 exit 0
