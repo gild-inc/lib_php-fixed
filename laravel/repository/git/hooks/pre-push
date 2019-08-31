@@ -2,12 +2,8 @@
 
 . config/.env.gild.lib
 
-echo "↓確認"
-echo $MASTER_PUSH_CONTROL
-echo "↑確認"
-
 if [ $MASTER_PUSH_CONTROL ] && [ $MASTER_PUSH_CONTROL = no ]; then
-    return
+    exit 0
 fi
 
 
