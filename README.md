@@ -32,3 +32,20 @@
 ### laravel
 * masterブランチにプッシュしようとしているときそのpushはキャンセルされます。
 * コーディングチェックはlaravelの標準ディレクトリ構成をベースにしたPSR2チェックを実施します。
+
+### 制御の無効化
+
+
+MASTER_PUSH_CONTROLにnoを指定することで、masterへのpushが可能となります。
+
+初期調整時にブランチを切るのが面倒な時に活用できます。
+
+
+`{リポジトリルート}/config/.env.gild.lib`
+
+```env
+# ex.
+
+# 任意
+MASTER_PUSH_CONTROL=no
+```

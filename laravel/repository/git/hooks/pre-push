@@ -1,5 +1,12 @@
 #!/bin/sh
 
+. config/.env.gild.lib
+
+if [ "$MASTER_PUSH_CONTROL" ] && [ "$MASTER_PUSH_CONTROL" = no ]; then
+    return
+fi
+
+
 while read local_ref local_sha remote_ref remote_sha
 do
     # masterへのpush禁止
