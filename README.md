@@ -35,11 +35,9 @@
 
 ### 制御の無効化
 
-
-MASTER_PUSH_CONTROLにnoを指定することで、masterへのpushが可能となります。
+MASTER_PUSH_CONTROLに`no`または`off`を指定することで、masterへのpushが可能となります。
 
 初期調整時にブランチを切るのが面倒な時に活用できます。
-
 
 `{リポジトリルート}/config/.env.gild.lib`
 

@@ -2,7 +2,7 @@
 
 . config/.env.gild.lib
 
-if [ $MASTER_PUSH_CONTROL ] && [ $MASTER_PUSH_CONTROL = no ]; then
+if [ $MASTER_PUSH_CONTROL ] && [ $MASTER_PUSH_CONTROL = off -o $MASTER_PUSH_CONTROL = no ]; then
     exit 0
 fi
 
