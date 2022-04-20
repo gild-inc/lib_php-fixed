@@ -1,49 +1,26 @@
 ## 概要
-特定のgit操作によってトリガーされるスクリプトを提供するライブラリです。
+PSRに準拠したphpのコーディングチェックをコミット前に行うことでコミットログを綺麗に保つ機能を提供するライブラリです。
 
-## 使用方法
+## 設定方法
 
 リポジトリルートの`composer.json`に以下を追記します。
+引数には `commit` か `push` を指定します。
 
 * composer.json
 ```json
 {
-    "repositories":[
-        {
-            "type": "vcs",
-            "url": "git@github.gild-inc:gild-inc/lib-git-hooks.git"
-        }
-    ],
     "require-dev": {
-        "gild-lib/git-hooks": "*"
+        "gild/php-fixed": "*"
     },
     "scripts": {
         "post-autoload-dump": [
-            ". vendor/gild-lib/git-hooks/execution.sh {any or laravel}"
+            ". vendor/gild/php-fixed/execution.sh commit"
         ]
     }
 }
 ```
 
-### any
-* masterブランチにプッシュしようとしているときそのpushはキャンセルされます。
-* コーディングチェックは行われません。
-
-### laravel
-* masterブランチにプッシュしようとしているときそのpushはキャンセルされます。
-* コーディングチェックはlaravelの標準ディレクトリ構成をベースにしたPSR2チェックを実施します。
-
-### 制御の無効化
-
-MASTER_PUSH_CONTROLに`no`または`off`を指定することで、masterへのpushが可能となります。
-
-初期調整時にブランチを切るのが面倒な時に活用できます。
-
-`{リポジトリルート}/config/.env.gild.lib`
-
-```env
-# ex.
-
-# 任意
-MASTER_PUSH_CONTROL=no
+```
+'. execution.sh commit'   ->  コミット前にコーディングチェックを行います。
+'. execution.sh push'     ->  プッシュ前にコーディングチェックを行います。コミット前のチェックは行いません。
 ```

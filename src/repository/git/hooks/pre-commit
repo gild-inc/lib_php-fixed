@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. vendor/gild/php-fixed/src/php-codesniffer/code_check.sh
+
+exit 0
