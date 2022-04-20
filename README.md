@@ -14,7 +14,7 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
     },
     "scripts": {
         "post-autoload-dump": [
-            ". vendor/gild/php-fixed/execution.sh commit"
+            "bash vendor/gild/php-fixed/execution.sh commit"
         ]
     }
 }
