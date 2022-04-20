@@ -1,13 +1,27 @@
 {
-    "name": "gild-lib/git-hooks",
-    "description": "A library that provides scripts triggered by specific git operations.",
+    "name": "gild/php-fixed",
+    "description": "It is a library that provides a function to keep the commit log clean by performing a coding check of php conforming to `PSR` before committing.",
+    "keywords": [
+        "php",
+        "pre-commit",
+        "pre-push",
+        "check",
+        "automation",
+        "php-codesniffer"
+    ],
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "MasayaGoto",
-            "email": "masaya.goto@gild.co.jp"
+            "email": "masaya.goto@gild.co.jp",
+            "role": "CEO",
+            "homepage": "https://gild.co.jp/"
         }
     ],
+    "support": {
+        "email": "service@gild.co.jp"
+    },
     "require": {
         "squizlabs/php_codesniffer": "*"
     }

@@ -2,13 +2,10 @@
 
 if [ $# -eq 0 ]; then
     echo "引数は必須です。"
-    echo "'. execution.sh any'      ->  dockerなどプロジェクトに属さないリポジトリのgit-hook設定を行います。"
-    echo "'. execution.sh laravel'  ->  laravelの標準ディレクトリ構成をベースにしたPSR2チェックを行うgit-hook設定を行います。"
+    echo "'. execution.sh commit'   ->  コミット前にコーディングチェックを行います。"
+    echo "'. execution.sh push'     ->  プッシュ前にコーディングチェックを行います。コミット前のチェックは行いません。"
     return
 fi
 
-if [ -e vendor/gild-lib/git-hooks/$1 ]; then
-    . vendor/gild-lib/git-hooks/$1/execution.sh
-else
-    echo "指定した引数は有効ではありません。"
-fi
+mkdir -p .git/hooks/
+cp vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 .git/hooks/
