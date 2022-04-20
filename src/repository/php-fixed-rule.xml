@@ -1,32 +1,36 @@
 <?xml version="1.0"?>
-<ruleset name="PSR2_PLUS">
-    <description>Custom rule on PSR2</description>
+<ruleset name="PSR12_Custom">
+    <description>Custom ruleset Based on PSR12</description>
+    <arg name ="colors" />
+    <!--    <arg value="ps" />-->
+
+    <!-- Laravelを想定して定義してますが、自由に書き換えてご使用ください。 -->
     <!-- 除外したいファイル、ディレクトリを列挙 -->
     <!-- メモリーサイズが不足しているエラーが出た場合は、不要なディレクトリ配下もチェックが通っていないか要確認 -->
     <exclude-pattern>*/.phpstorm.meta.php</exclude-pattern>
     <exclude-pattern>*/bootstrap/*</exclude-pattern>
     <exclude-pattern>*/composer.lock</exclude-pattern>
-    <exclude-pattern>*/database/*</exclude-pattern>
-    <exclude-pattern>*/docs/*</exclude-pattern>
+    <exclude-pattern>*/database/migrations/*</exclude-pattern>
+    <exclude-pattern>*/database/seeders/app/*</exclude-pattern>
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/public/*</exclude-pattern>
     <exclude-pattern>*/storage/*</exclude-pattern>
-    <exclude-pattern>*/test/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/_ide_helper.php</exclude-pattern>
     <exclude-pattern>*/_ide_helper_models.php</exclude-pattern>
-    <exclude-pattern>*/*.js</exclude-pattern>
-    <exclude-pattern>*/*.css</exclude-pattern>
-    <exclude-pattern>*/*.xml</exclude-pattern>
 
-    <!-- PSR2をベースとするため継承 -->
-    <rule ref="PSR2">
+    <!-- PSR12をベースとするため継承 -->
+    <rule ref="PSR12">
         <!-- 除外したい項目を列挙 -->
     </rule>
-    <!-- phpタグがない場合のエラーを除外(例えばxxx.blade.phpは別に<?phpから始まらなくても良いファイル。htmlファイルも同様。) -->
+
+    <!-- ↓ルールの除外 -->
+    <!-- phpタグがない場合のエラーを除外。例えばxxx.blade.phpは別に<?phpから始まらなくても良いファイル。htmlファイルも同様。 -->
     <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
+
+    <!-- ↓ルールの追加 -->
     <!--１行の文字数制限を変更-->
     <rule ref="Generic.Files.LineLength">
         <properties>

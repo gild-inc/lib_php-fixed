@@ -8,4 +8,7 @@ if [ $# -eq 0 ]; then
 fi
 
 mkdir -p .git/hooks/
+# チェックスクリプトを組み込んだトリガーファイルの複製。
 cp vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 .git/hooks/
+# 利用側が自由に定義して使えるようにプロジェクトに含めてもらうようにする。
+cp vendor/gild/php-fixed/src/repository/php-fixed-rule.xml ./php-fixed-rule.xml
