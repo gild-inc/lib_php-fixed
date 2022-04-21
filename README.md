@@ -10,7 +10,7 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
 ```json
 {
     "require-dev": {
-        "gild/php-fixed": "*"
+        "gild/php-fixed": "^2.0"
     },
     "scripts": {
         "post-autoload-dump": [

@@ -3,8 +3,6 @@
     <description>Custom ruleset Based on PSR12</description>
     <arg name ="colors" />
     <arg name ="report-full" value="./phpcs.log"/>
-<!--    <arg name="extensions" value="php" />-->
-<!--    <arg value="ps" />-->
 
     <!-- Laravelを想定して定義してますが、自由に書き換えてご使用ください。 -->
     <!-- 除外したいファイル、ディレクトリを列挙 -->
