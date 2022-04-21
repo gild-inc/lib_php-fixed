@@ -16,6 +16,4 @@ mkdir -p .git/hooks/
 # チェックスクリプトを組み込んだトリガーファイルの複製。
 cp vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 .git/hooks/
 # 利用側が自由に定義して使えるようにプロジェクトに含めてもらうようにする。
-if [ ! -e ./phpcs-rule.xml ]; then
-    cp vendor/gild/php-fixed/src/repository/phpcs-rule.xml ./phpcs-rule.xml
-fi
+cp vendor/gild/php-fixed/src/repository/phpcs-rule.xml ./phpcs-rule.xml
