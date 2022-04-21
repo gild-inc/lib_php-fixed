@@ -1,5 +1,13 @@
 #!bin/bash
 
+# sourceTree(php not found)対策。
+if [[ $(echo $SHELL) == '/bin/bash' ]]; then
+  source ~/.bash_profile
+else
+  source ~/.zprofile
+  source ~/.zshrc
+fi
+
 # コーディングチェックエラーがあれば {commit or push} はしない。
 RESULT=$(php ./vendor/bin/phpcs --standard=./phpcs-rule.xml .)
 if [ -n "$RESULT" ]; then
