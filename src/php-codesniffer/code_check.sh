@@ -2,10 +2,17 @@
 
 # sourceTree(php not found)対策。
 if [[ $(echo $SHELL) == '/bin/bash' ]]; then
-  source ~/.bash_profile
+    if [ -e ~/.bash_profile ]; then
+        source ~/.bash_profile
+    fi
 else
-  source ~/.zprofile
-  source ~/.zshrc
+    if [ -e ~/.zprofile ]; then
+        source ~/.zprofile
+    fi
+    # zshrcに定義されている可能性考慮。
+    if [ -e ~/.zshrc ]; then
+         source ~/.zshrc
+    fi
 fi
 
 # コーディングチェックエラーがあれば {commit or push} はしない。
