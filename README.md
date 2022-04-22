@@ -35,14 +35,24 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
 ```
 
 ## ルール設定方法
-`phpcs-rule.xml`は管理対象ファイルとしてください。
+`phpcs-rule.xml`は管理対象ファイルとしてください。  
 独自にルールを書き換えて自由に設定可能です。
 
+[Customisable Sniff Properties](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties)
+
 ## チェックログ
-一番初めにチェックスクリプトを走らせると`phpcs.log`がルートディレクトリに作成されます。  
-チェックスクリプトを実行する度に、ログファイルを削除して再度新しくログファイルを作成しています。  
-従って、前回実行時のログは残りません。  
-このログファイルは基本的に`.gitignore`へ追加します。
+
+以下のようなオプションでログを吐き出してはなりません。
+
+```xml
+<arg name ="report-full" value="./phpcs.log"/>
+```
+
+ログを吐き出すようにすると警告を捉えることができません。  
+phpcsの出力形式が変わる設定は行わないように注意してください。
+
+ログに出力したり出力形式を変える操作を行いたい場合は、commitまたはpushとは別に直接 `./vendor/bin/phpcs`を実行したり、composerのscriptsに独自定義します。
+
 
 ## gitクライアントソフトを介した挙動
 
