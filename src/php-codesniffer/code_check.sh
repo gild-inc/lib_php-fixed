@@ -42,4 +42,4 @@ if [ -n "$RESULT" ]; then
   exit 1
 fi
 echo $'\e[7;32mSuccess : コーディング規約に準拠していないソースコードはありません。'
-exit 1
+exit 0
