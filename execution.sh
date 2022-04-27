@@ -26,7 +26,7 @@ fi
 # 「code_check.shを呼び出す処理」を対象のトリガースクリプトとして複製。
 cp -f vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 $GIT_HOOK_DIR
 
-USER_CONFIG_DIR=.git_hooks
+USER_CONFIG_DIR=.git_hooks/coding_check
 mkdir -p $USER_CONFIG_DIR
 # 自由に定義して使えるようにチェックスクリプトとルール定義をポジトリに含めてもらうようにする為に複製。
 cp -f vendor/gild/php-fixed/src/php-codesniffer/code_check.sh $USER_CONFIG_DIR
