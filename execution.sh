@@ -12,8 +12,22 @@ if [ "$1" != "commit" ] && [ "$1" != "push" ]; then
   exit 1
 fi
 
-mkdir -p .git/hooks/
-# チェックスクリプトを組み込んだトリガーファイルの複製。
-cp vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 .git/hooks/
-# 利用側が自由に定義して使えるようにプロジェクトに含めてもらうようにする。
-cp vendor/gild/php-fixed/src/repository/phpcs-rule.xml ./phpcs-rule.xml
+GIT_HOOK_DIR=.git/hooks
+mkdir -p $GIT_HOOK_DIR
+# 念の為バックアップして、動作の一貫性担保の為削除。
+if [ "$1" = "commit" ] && [ -e $GIT_HOOK_DIR/pre-push ]; then
+  cp -f $GIT_HOOK_DIR/pre-push $GIT_HOOK_DIR/pre-push.buckup
+  rm -rf $GIT_HOOK_DIR/pre-push
+fi
+if [ "$1" = "push" ] && [ -e $GIT_HOOK_DIR/pre-commit ]; then
+  cp -f $GIT_HOOK_DIR/pre-commit $GIT_HOOK_DIR/pre-commit.buckup
+  rm -rf $GIT_HOOK_DIR/pre-commit
+fi
+# 「code_check.shを呼び出す処理」を対象のトリガースクリプトとして複製。
+cp -f vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 $GIT_HOOK_DIR
+
+USER_CONFIG_DIR=.git_hooks
+mkdir -p $USER_CONFIG_DIR
+# 自由に定義して使えるようにチェックスクリプトとルール定義をポジトリに含めてもらうようにする為に複製。
+cp -f vendor/gild/php-fixed/src/php-codesniffer/code_check.sh $USER_CONFIG_DIR
+cp -f vendor/gild/php-fixed/src/repository/phpcs-rule.xml $USER_CONFIG_DIR
