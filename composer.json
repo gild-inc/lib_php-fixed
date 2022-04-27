@@ -1,6 +1,6 @@
 {
     "name": "gild/php-fixed",
-    "description": "It is a library that provides a function to keep the commit log clean by performing a coding check of php conforming to `PSR` before committing.",
+    "description": "It is a library that provides a mechanism to keep the commit log clean by performing a PSR-compliant php coding check before committing.",
     "keywords": [
         "php",
         "pre-commit",

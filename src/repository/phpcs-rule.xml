@@ -1,11 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="PSR12_Custom">
     <description>Custom ruleset Based on PSR12</description>
-    <arg name ="colors" />
+    <arg name="colors" />
 
-    <!-- Laravelを想定して定義してますが、自由に書き換えてご使用ください。 -->
-    <!-- 除外したいファイル、ディレクトリを列挙 -->
-    <!-- メモリーサイズが不足しているエラーが出た場合は、不要なディレクトリ配下もチェックが通っていないか要確認 -->
     <exclude-pattern>*/.phpstorm.meta.php</exclude-pattern>
     <exclude-pattern>*/bootstrap/*</exclude-pattern>
     <exclude-pattern>*/composer.lock</exclude-pattern>
@@ -18,25 +15,67 @@
     <exclude-pattern>*/_ide_helper.php</exclude-pattern>
     <exclude-pattern>*/_ide_helper_models.php</exclude-pattern>
 
-    <!-- PSR12をベースとするため継承 -->
-    <rule ref="PSR12">
-        <!-- 除外したい項目を列挙 -->
-    </rule>
-
-    <!-- ↓ルールの除外 -->
-    <!-- phpタグがない場合のエラーを除外。例えばxxx.blade.phpは別に<?phpから始まらなくても良いファイル。htmlファイルも同様。 -->
-    <rule ref="Internal.NoCodeFound">
-        <severity>0</severity>
-    </rule>
-
-    <!-- ↓ルールの追加 -->
-    <!--１行の文字数制限を変更-->
+    <rule ref="PSR12"/>
+    <!-- ルール一覧と解説：https://qiita.com/blue32a/items/db049e091d4e7a469e6d -->
+    <rule ref="Generic.Arrays.ArrayIndent"/><!-- インデントがスペース４つであるかを検証 -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/><!-- array()ではなく[]になっていることを検証 -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/><!-- if(true){}などの空のステートメントがないことを検証 -->
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/><!-- if(true)のように無条件に真偽値が埋め込まれていないことを検証 -->
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/><!-- 関数の引数が未使用でないことを検証 -->
+    <rule ref="Generic.Commenting.Todo"/><!-- todoが存在しないことを検証（タスク管理しましょう） -->
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions"/><!-- ヨーダ条件式は文脈的にわかりづらいので非推奨 -->
+    <rule ref="Generic.Files.ByteOrderMark"/><!-- 文字コードがUTF-8（BOM無し）であることを検証 -->
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <!-- lineLimit         : 1 行の文字数が超過すると WARNING が発生 -->
-            <!-- absoluteLineLimit : 1 行の文字数が超過すると ERROR が発生   -->
-            <property name="lineLimit" value="160"/>
-            <property name="absoluteLineLimit" value="200"/>
+            <property name="lineLimit" value="160"/> <!-- 行の文字数が超過すると WARNING が発生 -->
+            <property name="absoluteLineLimit" value="200"/><!-- 行の文字数が超過すると ERROR が発生   -->
         </properties>
     </rule>
+    <rule ref="Generic.Formatting.NoSpaceAfterCast"/><!-- キャストの後に半角スペースがないことを検証 -->
+    <rule ref="Generic.Functions.CallTimePassByReference"/><!-- 関数へ変数の参照渡しをしていないことを検証 -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity"><!-- 関数の循環的複雑度が高くないことを検証 （重要）-->
+        <properties>
+            <property name="complexity" value="10" /><!-- 循環的複雑度が10を超えると WARNING が発生 -->
+            <property name="absoluteComplexity" value="20" /><!-- 循環的複雑度が20を超えると ERROR が発生 -->
+        </properties>
+    </rule>
+    <rule ref="Generic.Metrics.NestingLevel"><!-- 関数のネスト構造度が高くないことを検証 （重要）-->
+        <properties>
+            <property name="nestingLevel" value="5" /><!-- ネスト構造度が5を超えると WARNING が発生 -->
+            <property name="absoluteNestingLevel" value="10" /><!-- ネスト構造度が10を超えると WARNING が発生 -->
+        </properties>
+    </rule>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/><!-- 非推奨な組み込み関数を使用していないことを検証 -->
+    <rule ref="Generic.PHP.DisallowRequestSuperglobal"/><!-- $_REQUESTスーパーグローバルを使用していないことを検証 -->
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/><!-- 省略形のPHPオープンタグ<?を使用していないことを検証 -->
+    <rule ref="Generic.PHP.DiscourageGoto"/><!-- goto構文を使用していないことを検証 -->
+    <rule ref="Generic.PHP.ForbiddenFunctions"/><!-- sizeof()などのエイリアス関数を使用していないことを検証 -->
+    <rule ref="Generic.PHP.NoSilencedErrors"/><!-- 接頭辞が@のコードを使用していないこと（エラー警告をスルーしてないか）を検証 -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/><!-- 'Hoge' . 'Fuga'のように文字列同時が連結していないことを検証 -->
+    <rule ref="Generic.VersionControl.GitMergeConflict"/><!-- コンフリクト解消漏れがないことを検証 -->
+    <rule ref="Generic.WhiteSpace.ArbitraryParenthesesSpacing"/><!-- ($hoge !== 'fuga' )のように任意の括弧の内側の空白がないことを検証 -->
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/><!-- インデントにタブが使用されていないことを検証 -->
+    <rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/><!-- echo'hoge';のように単一の半角スペースが含まれていないことを検証 -->
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity><!-- phpタグがなくても良いことを検証。例えばxxx.blade.phpは<?phpから始まらなくても良いファイル -->
+    </rule>
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/><!-- 角括弧の周囲にスペースがないことを検証 -->
+    <rule ref="Squiz.Classes.ClassDeclaration"/><!-- クラス構造が正常であるかを検証 -->
+    <rule ref="Squiz.Classes.ClassFileName"/><!-- ファイル名とクラス名が一致しているかを検証 -->
+    <rule ref="Squiz.Classes.LowercaseClassKeywords"/><!-- CLASS Hogeのようにクラスキーワードが大文字ではないかを検証 -->
+    <rule ref="Squiz.Classes.SelfMemberReference"/><!-- selfメンバー参照が適切に行われているかを検証 -->
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/><!-- コメントのアスタリスクが正しく整列されているかを検証 -->
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/><!-- コメントなしの空のcatch句が使用されていないかを検証 -->
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/><!-- 関数内でthrowが使われている場合に@throwタグが存在するかを検証 -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/><!-- 変数名がキャメルケースであるかを検証 -->
+    <rule ref="Squiz.Operators.ValidLogicalOperators"/><!-- 論理演算子「and」および「or」が使用されていないこと（&&および||が使われているか）を検証 -->
+    <rule ref="Squiz.PHP.InnerFunctions"/><!-- 関数内の関数が使用されていないかを検証 -->
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/><!-- 組み込みのPHP関数へのすべての呼び出しが小文字であることを検証 -->
+    <rule ref="Squiz.PHP.NonExecutableCode"/><!-- break; echo 'hoge'のように到達不可能等の理由で処理できない部分がないかを検証 -->
+    <rule ref="Squiz.Scope.MemberVarScope"/><!-- プロパティーにスコープ修飾子（publicやprotectedなど）があるかを検証 -->
+    <rule ref="Squiz.Scope.MethodScope"/><!-- 関数にスコープ修飾子があるかを検証 -->
+    <rule ref="Squiz.Scope.StaticThisUsage"/><!-- $this::HOGEのように静的アクセスに$thisを使ってないかを検証 -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/><!-- ダブルクォーテーションを使ってないことを検証（非推奨とすることを推奨します） -->
+    <rule ref="Squiz.Strings.EchoedStrings"/><!-- echo('hoge')のように中括弧で囲まれていないことを検証 -->
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/><!-- セミコロンの前に空白がないことを検証 -->
 </ruleset>
