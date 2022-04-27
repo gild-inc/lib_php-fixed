@@ -16,7 +16,7 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
             "bash vendor/gild/php-fixed/execution.sh commit"
         ],
         "check": [
-            "bash .git_hooks/code_check.sh"
+            "bash .git_hooks/coding_check/code_check.sh"
         ],
         "lint": [ 
             "php ./vendor/bin/phpcs --standard=./.git_hooks/coding_check/phpcs-rule.xml -sp ."
