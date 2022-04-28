@@ -24,5 +24,13 @@
     },
     "require": {
         "squizlabs/php_codesniffer": "*"
+    },
+    "require-dev": {
+        "gild/github-template": "^1.0"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            ". vendor/gild/github-template/execution.sh"
+        ]
     }
 }

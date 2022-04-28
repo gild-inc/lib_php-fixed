@@ -16,13 +16,13 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
             "bash vendor/gild/php-fixed/execution.sh commit"
         ],
         "check": [
-            "bash .git_hooks/coding_check/code_check.sh"
+            "bash .git_hooks/php-fixed/code_check.sh"
         ],
         "lint": [ 
-            "php ./vendor/bin/phpcs --standard=./.git_hooks/coding_check/phpcs-rule.xml -sp ."
+            "php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp ."
         ],
         "lint-fix": [
-            "php ./vendor/bin/phpcbf --standard=./.git_hooks/coding_check/phpcs-rule.xml -sp ."
+            "php ./vendor/bin/phpcbf --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp ."
         ]
     }
 }
@@ -121,10 +121,10 @@ gitクライアントソフトを利用する方は上記設定をしていな�
 {
     "scripts": {
         "lint": [ 
-            "php ./vendor/bin/phpcs --standard=./.git_hooks/coding_check/phpcs-rule.xml -sp --report-full=./phpcs.log ."
+            "php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp --report-full=./phpcs.log ."
         ],
         "lint-fix": [
-            "php ./vendor/bin/phpcbf --standard=./.git_hooks/coding_check/phpcs-rule.xml -sp --report-full=./phpcbf.log ."
+            "php ./vendor/bin/phpcbf --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp --report-full=./phpcbf.log ."
         ]
     }
 }
@@ -139,6 +139,6 @@ pre-commitやpre-pushは`.buckup`という接尾辞を付与して退避して�
 ## 補足
 可能であればローカル環境への別途導入物はライブラリに依存すべきではないと考えていますが、git操作はローカル環境においてdocker-containerから行うケースは殆どない為、各自のローカル環境に導入要件（php5.4以上）を組み込んでいただく必要がありました。
 
-ver2.0.0からアップグレードされた方は、ルートディレクトリに存在する`phpcs-rule.xml`はその内容を`.git_hooks/coding_check/phpcs-rule.xml`に置き換えてください。
+ver2.0.0からアップグレードされた方は、ルートディレクトリに存在する`phpcs-rule.xml`はその内容を`.git_hooks/php-fixed/phpcs-rule.xml`に置き換えてください。
 
-**ver2.0.0以降では`.git_hooks/coding_check/phpcs-rule.xml`を参照するようになります。**
+**ver2.0.0以降では`.git_hooks/php-fixed/phpcs-rule.xml`を参照するようになります。**
