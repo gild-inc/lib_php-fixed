@@ -26,11 +26,13 @@
         "squizlabs/php_codesniffer": "*"
     },
     "require-dev": {
+        "gild/add-issue-number": "^1.0",
         "gild/github-template": "^1.0"
     },
     "scripts": {
         "post-autoload-dump": [
-            ". vendor/gild/github-template/execution.sh"
+            "bash vendor/gild/add-issue-number/execution.sh",
+            "bash vendor/gild/github-template/execution.sh"
         ]
     }
 }

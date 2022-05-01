@@ -23,11 +23,22 @@ if [ "$1" = "push" ] && [ -e $GIT_HOOK_DIR/pre-commit ]; then
   cp -f $GIT_HOOK_DIR/pre-commit $GIT_HOOK_DIR/pre-commit.buckup
   rm -rf $GIT_HOOK_DIR/pre-commit
 fi
-# 「code_check.shを呼び出す処理」を対象のトリガースクリプトとして複製。
+# 「main.shを呼び出す処理」を対象のトリガースクリプトとして複製。
 cp -f vendor/gild/php-fixed/src/repository/git/hooks/pre-$1 $GIT_HOOK_DIR
 
-USER_CONFIG_DIR=.git_hooks/php-fixed
+# バックアップを取って、消去する。
+USER_CONFIG_DIR=.git_hooks/pre-$1
 mkdir -p $USER_CONFIG_DIR
+if [ -e $USER_CONFIG_DIR/main.sh ]; then
+  cp -f $USER_CONFIG_DIR/main.sh $USER_CONFIG_DIR/main.sh.buckup
+  rm -rf $USER_CONFIG_DIR/main.sh
+fi
 # 自由に定義して使えるようにチェックスクリプトとルール定義をポジトリに含めてもらうようにする為に複製。
-cp -f vendor/gild/php-fixed/src/php-codesniffer/code_check.sh $USER_CONFIG_DIR
-cp -f vendor/gild/php-fixed/src/repository/phpcs-rule.xml $USER_CONFIG_DIR
+cp -f vendor/gild/php-fixed/src/repository/git-hooks/main.sh $USER_CONFIG_DIR
+
+# バージョンアップ差分整合性対応
+if [ -e phpcs-rule.xml ]; then
+  cp -f phpcs-rule.xml phpcs.xml
+  rm -rf phpcs-rule.xml
+fi
+cp -f vendor/gild/php-fixed/src/repository/phpcs.xml .

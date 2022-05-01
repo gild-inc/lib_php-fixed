@@ -16,13 +16,13 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
             "bash vendor/gild/php-fixed/execution.sh commit"
         ],
         "check": [
-            "bash .git_hooks/php-fixed/code_check.sh"
+            "bash .git_hooks/pre-commit/main.sh"
         ],
         "lint": [ 
-            "php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp ."
+            "phpcs --standard=phpcs.xml -sp ."
         ],
-        "lint-fix": [
-            "php ./vendor/bin/phpcbf --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp ."
+        "lint:fix": [
+            "phpcbf --standard=phpcs.xml -sp ."
         ]
     }
 }
@@ -32,7 +32,7 @@ PSRに準拠したphpのコーディングチェックをコミット前に行�
 composer require --dev gild/php-fixed ^3.0
 ```
 
-check, lint, lint-fixは任意で設定するものになります。  
+check, lint, lint:fixは任意で設定するものになります。  
 post-autoload-dumpが重要です。
 
 ### post-autoload-dump
@@ -47,35 +47,35 @@ post-autoload-dumpが重要です。
 
 ### check
 
-commitを行わずに、単にコーディングチェックから自動修正まで一気通貫して行いたい場合に使用します。これは`lint`と`lint-fix`の組み合わせです。
+commitを行わずに、単にコーディングチェックから自動修正まで一気通貫して行いたい場合に使用します。これは`lint`と`lint:fix`の組み合わせです。
 
 commit時に行われる、`コーディングチェックから自動修正`までの処理は`composer check`を呼び出しているわけではありません。
 checkエイリアス自体の処理は本ライブラリを組み込む際の依存関係はないものとなります。
-lintとlint-fixについても同様です。
+lintとlint:ixについても同様です。
 
 ### lint
 
 commitを行わずに、単にコーディングチェックを行いたい場合に使用します。
 
-### lint-fix
+### lint:fix
 
 commitを行わずに、単に自動修正を行いたい場合に使用します。
 
 ## 管理対象ファイルについて
 
-`.git_hooks`配下に生成されているファイルについては、管理対象ファイルとしてください。
+以下は管理対象ファイルとしてください。
 
-### phpcs-rule.xml
+### phpcs.xml
 
+このファイルはリポジトリ直下に生成されます。  
 Laravelをベースにルール定義していますが 、独自にルールを書き換えて自由に設定可能です。
 [Customisable Sniff Properties](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties)
 
-ファイル名を変更することは可能ですが、`code_check.sh`でファイル名変更することを忘れないで下さい。
+ファイル名を変更することは可能ですが、`main.sh`でファイル名変更することを忘れないで下さい。
 
-### code_check.sh
-ルールの設定に加えて、処理自体も利用者が設定管理することを可能としました。  
-ファイル名を変更することは可能ですが、対象のpreファイルにて呼び出しスクリプト名を変更しなければなりません。  
-ファイル名の変更は行わずにデフォルトファイル名を使用することを推奨します。
+### main.sh
+このファイルはリポジトリ直下に生成されるgit-hooks/pre-{triggerType}配下に生成されます。  
+処理自体は利用者が設定管理することが可能です。 ファイル名の変更は不可です。
 
 ## gitクライアントソフトを介した挙動
 
@@ -107,7 +107,7 @@ gitクライアントソフトを利用する方は上記設定をしていな�
 
 ### 出力形式やログについて
 
-以下のような出力形式が変わるオプションは`phpcs-rule.xml`に定義してはなりません。
+以下のような出力形式が変わるオプションは`phpcs.xml`に定義してはなりません。
 ログを吐き出すようにするとチェックスクリプトが警告を捉えることができません。
 
 ```xml
@@ -120,11 +120,11 @@ gitクライアントソフトを利用する方は上記設定をしていな�
 ```json
 {
     "scripts": {
-        "lint": [ 
-            "php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp --report-full=./phpcs.log ."
+        "lint": [
+          "phpcs --standard=phpcs.xml -sp ."
         ],
-        "lint-fix": [
-            "php ./vendor/bin/phpcbf --standard=./.git_hooks/php-fixed/phpcs-rule.xml -sp --report-full=./phpcbf.log ."
+        "lint:fix": [
+          "phpcbf --standard=phpcs.xml -sp ."
         ]
     }
 }
@@ -138,7 +138,3 @@ pre-commitやpre-pushは`.buckup`という接尾辞を付与して退避して�
 
 ## 補足
 可能であればローカル環境への別途導入物はライブラリに依存すべきではないと考えていますが、git操作はローカル環境においてdocker-containerから行うケースは殆どない為、各自のローカル環境に導入要件（php5.4以上）を組み込んでいただく必要がありました。
-
-ver2.0.0からアップグレードされた方は、ルートディレクトリに存在する`phpcs-rule.xml`はその内容を`.git_hooks/php-fixed/phpcs-rule.xml`に置き換えてください。
-
-**ver2.0.0以降では`.git_hooks/php-fixed/phpcs-rule.xml`を参照するようになります。**
