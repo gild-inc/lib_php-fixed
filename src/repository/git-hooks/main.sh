@@ -14,7 +14,7 @@ if [ ! -e /usr/local/bin/php ]; then
 fi
 
 # コーディングチェックエラーがあれば {commit or push} はしない。
-RESULT=$(php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml .)
+RESULT=$(php ./vendor/bin/phpcs --standard=phpcs.xml .)
 if [ -n "$RESULT" ]; then
 
   # 自動修正して確認を促す。
@@ -23,7 +23,7 @@ if [ -n "$RESULT" ]; then
   # エラーがある。
   if [[ $RESULT =~ 'FOUND 1 ERROR' ]]; then
     echo $'\e[1;41mERROR-INFO : 自動修正を行いますが、修正点を確認してからcommitしてください。\e[0m'
-    php ./vendor/bin/phpcbf --standard=./.git_hooks/php-fixed/phpcs-rule.xml .
+    php ./vendor/bin/phpcbf --standard=phpcs.xml .
     echo $'\e[1;41mERROR=INFO : コーディング規約に準拠していないソースコードを修正しました。\e[0m'
     git diff
     exit 1
@@ -32,7 +32,7 @@ if [ -n "$RESULT" ]; then
   # エラーはないが警告はある。
   if [[ ! $RESULT =~ 'FOUND 1 ERROR' ]] && [[ $RESULT =~ 'FOUND 0 ERRORS' ]]; then
     echo $'\e[1;43mWARNING-INFO : 自動修正できない箇所があります。\e[0m'
-    php ./vendor/bin/phpcs --standard=./.git_hooks/php-fixed/phpcs-rule.xml --report=code .
+    php ./vendor/bin/phpcs --standard=phpcs.xml --report=code .
     exit 1
   fi
 
